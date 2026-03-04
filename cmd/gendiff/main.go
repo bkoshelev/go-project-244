@@ -14,8 +14,41 @@ func main() {
 	cmd := &cli.Command{
 		Name:  "gendiff",
 		Usage: "Compares two configuration files and shows a difference.",
+		Arguments: []cli.Argument{
+			&cli.StringArg{
+				Name:      "filepath1",
+				Value:     "",
+				UsageText: "path to first file",
+			},
+			&cli.StringArg{
+				Name:      "filepath2",
+				Value:     "",
+				UsageText: "path to second file",
+			},
+		},
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:    "format",
+				Aliases: []string{"f"},
+				Value:   "stylish",
+				Usage:   "output format",
+			},
+		},
 		Action: func(ctx context.Context, cmd *cli.Command) error {
-			result := code.GenDiff()
+			filepath1 := cmd.StringArg("filepath1")
+			filepath2 := cmd.StringArg("filepath2")
+
+			format := cmd.String("format")
+
+			if filepath1 == "" || filepath2 == "" {
+				return fmt.Errorf("you need to write paths to configuration files")
+			}
+
+			result, err := code.GenDiff(filepath1, filepath2, format)
+
+			if err != nil {
+				return fmt.Errorf("fail to generate diff: %w", err)
+			}
 			fmt.Println(result)
 			return nil
 		},

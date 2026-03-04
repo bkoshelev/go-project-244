@@ -1,5 +1,5 @@
 package code
 
-func GenDiff() string {
-	return "Hello, world"
+func GenDiff(filepath1, filepath2, format string) (string, error) {
+	return "Hello, world", nil
 }
