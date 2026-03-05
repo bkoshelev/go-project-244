@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	code "github.com/bkoshelev/go-project-244/src"
+	code "github.com/bkoshelev/go-project-244/src/gendiff"
 	"github.com/urfave/cli/v3"
 )
 
@@ -44,7 +44,11 @@ func main() {
 				return fmt.Errorf("you need to write paths to configuration files")
 			}
 
-			result := code.GenDiff(filepath1, filepath2, format)
+			result, err := code.GenDiff(filepath1, filepath2, format)
+
+			if err != nil {
+				return fmt.Errorf("fail to generate diff: %w", err)
+			}
 			fmt.Println(result)
 			return nil
 		},
