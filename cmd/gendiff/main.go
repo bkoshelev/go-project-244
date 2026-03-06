@@ -36,7 +36,7 @@ func main() {
 		},
 		Action: func(ctx context.Context, cmd *cli.Command) error {
 			filepath1 := cmd.StringArg("filepath1")
-			filepath2 := cmd.StringArg("filepath1")
+			filepath2 := cmd.StringArg("filepath2")
 
 			format := cmd.String("format")
 
