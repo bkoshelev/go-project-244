@@ -3,6 +3,7 @@ package parsers
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
 	"strings"
 )
@@ -17,7 +18,7 @@ func (parser ParserJson) Parse(filepath string) (map[string]any, error) {
 	fileData, err := os.ReadFile(filepath)
 
 	if err != nil {
-		return map[string]any{}, errors.New("fail to file reading")
+		return map[string]any{}, fmt.Errorf("fail to file reading: %w", err)
 	}
 
 	result := map[string]any{}
@@ -31,15 +32,14 @@ func (parser ParserJson) Parse(filepath string) (map[string]any, error) {
 }
 
 func ParseFile(filepath string) (map[string]any, error) {
-
 	fileInfo, err := os.Lstat(filepath)
 
 	if err != nil {
-		return map[string]any{}, errors.New("path does not exist")
+		return map[string]any{}, fmt.Errorf("path %v does not exist: %w", filepath, err)
 	}
 
 	if fileInfo.IsDir() {
-		return map[string]any{}, errors.New("need to select congfiguration json file")
+		return map[string]any{}, fmt.Errorf("need to select congfiguration json file: %w", err)
 	}
 
 	var parser Parser
