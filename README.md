@@ -6,6 +6,8 @@
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bkoshelev_go-project-244&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=bkoshelev_go-project-244)
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bkoshelev_go-project-244&metric=coverage)](https://sonarcloud.io/summary/new_code?id=bkoshelev_go-project-244)
+
 ## Использование
 
 ### Сравнение плоских файлов (JSON)
