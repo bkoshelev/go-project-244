@@ -48,6 +48,13 @@ func TestGenDiff(t *testing.T) {
 			errors.New(""),
 			"",
 		},
+		{
+			"./../../testdata/file1.yml",
+			"./../../testdata/file2.yml",
+			"",
+			nil,
+			string(file),
+		},
 	}
 
 	for _, c := range cases {

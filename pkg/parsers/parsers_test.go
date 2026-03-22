@@ -15,10 +15,11 @@ func TestParseJsonFile(t *testing.T) {
 		want     map[string]any
 	}{
 		{"./../../testdata/file1.json", nil, map[string]any{"follow": false, "host": "hexlet.io", "proxy": "123.234.53.22", "timeout": 50.0}},
-		{"./../../testdata/flat1.jso", errors.New("Неизвестный тип файла"), map[string]any{}},
+		{"./../../testdata/flat1.jso", errors.New("Файл не существует"), map[string]any{}},
 		{"./../../testdata/incorrect.json", errors.New("Содержимое файла не соответствует типу файла"), map[string]any{}},
 		{"./../../testdata/empty_file.json", errors.New("Содержимое файла не соответствует типу файла"), map[string]any{}},
 		{"./../../testdata", errors.New("Путь должен вести к файлу, а не к папке"), map[string]any{}},
+		{"./../../testdata/unsupported_ext.unsupported", errors.New("Тип файла не поддерживается"), map[string]any{}},
 	}
 
 	for _, c := range cases {
