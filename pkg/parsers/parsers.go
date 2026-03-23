@@ -41,7 +41,7 @@ func (parser ParserYml) Parse(data []byte) (map[string]any, error) {
 	return result, nil
 }
 
-func createNewParser(filename string) (Parser, error) {
+func getParser(filename string) (Parser, error) {
 	switch {
 	case strings.HasSuffix(filename, ".json"):
 		return ParserJson{}, nil
@@ -69,7 +69,7 @@ func ParseFile(filepath string) (map[string]any, error) {
 		return map[string]any{}, fmt.Errorf("fail to file reading: %w", err)
 	}
 
-	parser, err := createNewParser(fileInfo.Name())
+	parser, err := getParser(fileInfo.Name())
 
 	if err != nil {
 		return map[string]any{}, fmt.Errorf("parser creation fail: %w", err)

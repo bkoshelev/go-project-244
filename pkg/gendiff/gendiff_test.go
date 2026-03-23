@@ -12,6 +12,7 @@ import (
 func TestGenDiff(t *testing.T) {
 	file, _ := os.ReadFile("../../testdata/fixtures/file.txt")
 	empty, _ := os.ReadFile("../../testdata/fixtures/empty.txt")
+	deep, _ := os.ReadFile("../../testdata/fixtures/deep.txt")
 
 	cases := []struct {
 		filepath1 string
@@ -54,6 +55,20 @@ func TestGenDiff(t *testing.T) {
 			"",
 			nil,
 			string(file),
+		},
+		{
+			"./../../testdata/deep_1.json",
+			"./../../testdata/deep_2.json",
+			"",
+			nil,
+			string(deep),
+		},
+		{
+			"./../../testdata/deep_1.yml",
+			"./../../testdata/deep_2.yml",
+			"",
+			nil,
+			string(deep),
 		},
 	}
 
