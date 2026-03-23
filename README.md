@@ -17,3 +17,7 @@
 ### Сравнение плоских файлов (YAML)
 
 [![asciicast](https://asciinema.org/a/uusnSd3syU13XoPQ.svg)](https://asciinema.org/a/uusnSd3syU13XoPQ)
+
+### Сравнение вложенных структур (JSON, Stylish)
+
+[![asciicast](https://asciinema.org/a/wRxC3NJwrtcEX7JQ.svg)](https://asciinema.org/a/wRxC3NJwrtcEX7JQ)
