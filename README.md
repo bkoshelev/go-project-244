@@ -21,3 +21,7 @@
 ### Сравнение вложенных структур (JSON, Stylish)
 
 [![asciicast](https://asciinema.org/a/wRxC3NJwrtcEX7JQ.svg)](https://asciinema.org/a/wRxC3NJwrtcEX7JQ)
+
+### Сравнение вложенных структур (JSON, Plain)
+
+[![asciicast](https://asciinema.org/a/LOdF02EiHrDLNcVB.svg)](https://asciinema.org/a/LOdF02EiHrDLNcVB)
