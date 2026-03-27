@@ -19,6 +19,8 @@ type NodeType string
 
 type Node struct {
 	Key      string
+	Value1   any
+	Value2   any
 	NodeType NodeType
 	Children []Node
 }
@@ -30,32 +32,33 @@ func CreateDiff(data1, data2 map[string]any) (diff []Node) {
 	allKeys := lo.Union(data1Keys, data2Keys)
 	slices.Sort(allKeys)
 
-	diff1, diff2 := lo.Difference(data1Keys, data2Keys)
+	removedKeys, addedKeys := lo.Difference(data1Keys, data2Keys)
 
 	for _, key := range allKeys {
 
 		value1 := data1[key]
-		_, ok := value1.(map[string]any)
+		_, val1IsMap := value1.(map[string]any)
 		value2 := data2[key]
-		_, ok2 := value2.(map[string]any)
+		_, val2IsMap := value2.(map[string]any)
 
-		if ok && ok2 {
-			children := CreateDiff(value1.(map[string]any), value2.(map[string]any))
-			diff = append(diff, Node{key, CHILDREN, children})
-			continue
-		}
+		var children []Node
+		var status NodeType
 
 		switch {
-		case slices.Contains(diff2, key):
-			diff = append(diff, Node{key, ADDED, nil})
-		case slices.Contains(diff1, key):
-			diff = append(diff, Node{key, REMOVED, nil})
+		case val1IsMap && val2IsMap:
+			children = CreateDiff(value1.(map[string]any), value2.(map[string]any))
+			status = CHILDREN
+		case slices.Contains(addedKeys, key):
+			status = ADDED
+		case slices.Contains(removedKeys, key):
+			status = REMOVED
 		case data1[key] != data2[key]:
-			diff = append(diff, Node{key, CHANGED, nil})
-
+			status = CHANGED
 		default:
-			diff = append(diff, Node{key, UNCHANGED, nil})
+			status = UNCHANGED
 		}
+
+		diff = append(diff, Node{key, value1, value2, status, children})
 	}
 
 	return diff

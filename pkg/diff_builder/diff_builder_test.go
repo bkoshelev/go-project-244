@@ -15,13 +15,13 @@ func TestCreateDiff(t *testing.T) {
 	}{
 		{
 			map[string]any{"follow": false, "host": "hexlet.io", "proxy": "123.234.53.22", "timeout": 50.0},
-			map[string]any{"verbose": false, "host": "hexlet.io", "timeout": 20.0},
+			map[string]any{"verbose": true, "host": "hexlet.io", "timeout": 20.0},
 			[]Node{
-				{"follow", REMOVED, nil},
-				{"host", UNCHANGED, nil},
-				{"proxy", REMOVED, nil},
-				{"timeout", CHANGED, nil},
-				{"verbose", ADDED, nil},
+				{"follow", false, nil, REMOVED, nil},
+				{"host", "hexlet.io", "hexlet.io", UNCHANGED, nil},
+				{"proxy", "123.234.53.22", nil, REMOVED, nil},
+				{"timeout", 50.0, 20.0, CHANGED, nil},
+				{"verbose", nil, true, ADDED, nil},
 			},
 		},
 	}
