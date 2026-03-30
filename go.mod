@@ -1,6 +1,6 @@
 module github.com/bkoshelev/go-project-244
 
-go 1.25.0
+go 1.25
 
 require (
 	github.com/samber/lo v1.53.0
