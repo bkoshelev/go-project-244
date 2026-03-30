@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	code "github.com/bkoshelev/go-project-244/pkg/gendiff"
+	code "github.com/bkoshelev/go-project-244"
 	"github.com/urfave/cli/v3"
 )
 

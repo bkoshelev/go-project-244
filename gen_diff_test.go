@@ -10,10 +10,10 @@ import (
 )
 
 func TestGenDiff(t *testing.T) {
-	file, _ := os.ReadFile("../../testdata/fixtures/file.txt")
-	empty, _ := os.ReadFile("../../testdata/fixtures/empty.txt")
-	deep, _ := os.ReadFile("../../testdata/fixtures/deep.txt")
-	deepPlain, _ := os.ReadFile("../../testdata/fixtures/deep_plain.txt")
+	file, _ := os.ReadFile("./testdata/fixtures/file.txt")
+	empty, _ := os.ReadFile("./testdata/fixtures/empty.txt")
+	deep, _ := os.ReadFile("./testdata/fixtures/deep.txt")
+	deepPlain, _ := os.ReadFile("./testdata/fixtures/deep_plain.txt")
 
 	cases := []struct {
 		filepath1 string
@@ -23,57 +23,57 @@ func TestGenDiff(t *testing.T) {
 		want      string
 	}{
 		{
-			"./../../testdata/file1.json",
-			"./../../testdata/file2.json",
+			"././testdata/file1.json",
+			"././testdata/file2.json",
 			"",
 			nil,
 			string(file),
 		},
 		{
-			"./../../testdata/empty1.json",
-			"./../../testdata/empty2.json",
+			"././testdata/empty1.json",
+			"././testdata/empty2.json",
 			"",
 			nil,
 			string(empty),
 		},
 		{
 			"./unknown.json",
-			"./../../testdata/file2.json",
+			"././testdata/file2.json",
 			"",
 			errors.New(""),
 			"",
 		},
 		{
-			"./../../testdata/file1.json",
+			"././testdata/file1.json",
 			"./unknown.json",
 			"",
 			errors.New(""),
 			"",
 		},
 		{
-			"./../../testdata/file1.yml",
-			"./../../testdata/file2.yml",
+			"././testdata/file1.yml",
+			"././testdata/file2.yml",
 			"",
 			nil,
 			string(file),
 		},
 		{
-			"./../../testdata/deep_1.json",
-			"./../../testdata/deep_2.json",
+			"././testdata/deep_1.json",
+			"././testdata/deep_2.json",
 			"",
 			nil,
 			string(deep),
 		},
 		{
-			"./../../testdata/deep_1.yml",
-			"./../../testdata/deep_2.yml",
+			"././testdata/deep_1.yml",
+			"././testdata/deep_2.yml",
 			"",
 			nil,
 			string(deep),
 		},
 		{
-			"./../../testdata/deep_1.yml",
-			"./../../testdata/deep_2.yml",
+			"././testdata/deep_1.yml",
+			"././testdata/deep_2.yml",
 			"plain",
 			nil,
 			string(deepPlain),

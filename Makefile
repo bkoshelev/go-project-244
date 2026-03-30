@@ -7,4 +7,4 @@ lint:
 lint-fix:
 	golangci-lint run --fix
 test:
-	go test ./pkg/... -coverprofile=coverage.out
+	go test ./... -coverprofile=coverage.out
