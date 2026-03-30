@@ -51,8 +51,8 @@ func (fmtr PlainFormatter) fmtDiff(path []string, diff []diffbuilder.Node) strin
 	return builder.String()
 }
 
-func (fmtr PlainFormatter) Format(diff []diffbuilder.Node) string {
-	return fmtr.fmtDiff([]string{}, diff)
+func (fmtr PlainFormatter) Format(diff []diffbuilder.Node) (string, error) {
+	return fmtr.fmtDiff([]string{}, diff), nil
 }
 func CreatePlainFormatter() PlainFormatter {
 	return PlainFormatter{}

@@ -25,5 +25,5 @@ func GenDiff(filepath1, filepath2, format string) (string, error) {
 
 	formatter := formatters.GetFormatter(format)
 
-	return formatter.Format(diff), nil
+	return formatter.Format(diff)
 }

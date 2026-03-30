@@ -80,8 +80,8 @@ func (fmtr StylishFormatter) fmtDiff(diff []diffbuilder.Node, objKey string, dep
 	return builder.String()
 }
 
-func (fmtr StylishFormatter) Format(diff []diffbuilder.Node) string {
-	return fmtr.fmtDiff(diff, "", 0)
+func (fmtr StylishFormatter) Format(diff []diffbuilder.Node) (string, error) {
+	return fmtr.fmtDiff(diff, "", 0), nil
 }
 
 func CreateStylishFormatter() StylishFormatter {

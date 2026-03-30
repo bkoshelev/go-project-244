@@ -1,0 +1,23 @@
+package formatters
+
+import (
+	"encoding/json"
+	"fmt"
+
+	diffbuilder "github.com/bkoshelev/go-project-244/pkg/diff_builder"
+)
+
+type JsonFormatter struct{}
+
+func (fmtr JsonFormatter) Format(diff []diffbuilder.Node) (string, error) {
+	result, e := json.Marshal(diff)
+
+	if e != nil {
+		return "", fmt.Errorf("creation json output fail: %w", e)
+	}
+	return string(result), nil
+}
+
+func CreateJsonFormatter() JsonFormatter {
+	return JsonFormatter{}
+}
