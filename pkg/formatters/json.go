@@ -10,7 +10,19 @@ import (
 type JsonFormatter struct{}
 
 func (fmtr JsonFormatter) Format(diff []diffbuilder.Node) (string, error) {
-	result, e := json.Marshal(diff)
+
+	if len(diff) == 0 {
+		result, _ := json.Marshal(map[string]any{})
+		return string(result), nil
+	}
+
+	result, e := json.Marshal(diffbuilder.Node{
+		Key:      "",
+		Value1:   nil,
+		Value2:   nil,
+		NodeType: "ROOT",
+		Children: diff,
+	})
 
 	if e != nil {
 		return "", fmt.Errorf("creation json output fail: %w", e)
