@@ -52,7 +52,7 @@ func (fmtr PlainFormatter) fmtDiff(path []string, diff []diffbuilder.Node) strin
 }
 
 func (fmtr PlainFormatter) Format(diff []diffbuilder.Node) (string, error) {
-	return fmtr.fmtDiff([]string{}, diff), nil
+	return strings.Trim(fmtr.fmtDiff([]string{}, diff), "\n"), nil
 }
 func CreatePlainFormatter() PlainFormatter {
 	return PlainFormatter{}
