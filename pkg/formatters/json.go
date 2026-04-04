@@ -7,9 +7,9 @@ import (
 	diffbuilder "github.com/bkoshelev/go-project-244/pkg/diff_builder"
 )
 
-type JsonFormatter struct{}
+type JSONFormatter struct{}
 
-func (fmtr JsonFormatter) Format(diff []diffbuilder.Node) (string, error) {
+func (fmtr JSONFormatter) Format(diff []diffbuilder.Node) (string, error) {
 
 	if len(diff) == 0 {
 		result, _ := json.Marshal(map[string]any{})
@@ -30,6 +30,6 @@ func (fmtr JsonFormatter) Format(diff []diffbuilder.Node) (string, error) {
 	return string(result), nil
 }
 
-func CreateJsonFormatter() JsonFormatter {
-	return JsonFormatter{}
+func CreateJSONFormatter() JSONFormatter {
+	return JSONFormatter{}
 }

@@ -2,20 +2,21 @@ package diffbuilder
 
 import (
 	"maps"
+	"reflect"
 	"slices"
 
 	"github.com/samber/lo"
 )
 
-const (
-	ADDED     = "ADDED"
-	REMOVED   = "REMOVED"
-	CHANGED   = "CHANGED"
-	UNCHANGED = "UNCHANGED"
-	CHILDREN  = "CHILDREN"
-)
-
 type NodeType string
+
+const (
+	ADDED     NodeType = "ADDED"
+	REMOVED   NodeType = "REMOVED"
+	CHANGED   NodeType = "CHANGED"
+	UNCHANGED NodeType = "UNCHANGED"
+	CHILDREN  NodeType = "CHILDREN"
+)
 
 type Node struct {
 	Key      string
@@ -32,13 +33,11 @@ func CreateDiff(data1, data2 map[string]any) (diff []Node) {
 	allKeys := lo.Union(data1Keys, data2Keys)
 	slices.Sort(allKeys)
 
-	removedKeys, addedKeys := lo.Difference(data1Keys, data2Keys)
-
 	for _, key := range allKeys {
 
-		value1 := data1[key]
+		value1, existInData1 := data1[key]
 		_, val1IsMap := value1.(map[string]any)
-		value2 := data2[key]
+		value2, existInData2 := data2[key]
 		_, val2IsMap := value2.(map[string]any)
 
 		var children []Node
@@ -48,11 +47,11 @@ func CreateDiff(data1, data2 map[string]any) (diff []Node) {
 		case val1IsMap && val2IsMap:
 			children = CreateDiff(value1.(map[string]any), value2.(map[string]any))
 			status = CHILDREN
-		case slices.Contains(addedKeys, key):
+		case !existInData1 && existInData2:
 			status = ADDED
-		case slices.Contains(removedKeys, key):
+		case existInData1 && !existInData2:
 			status = REMOVED
-		case data1[key] != data2[key]:
+		case !reflect.DeepEqual(value1, value2):
 			status = CHANGED
 		default:
 			status = UNCHANGED

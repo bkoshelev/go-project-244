@@ -15,7 +15,7 @@ func GetFormatter(formatterName string) Formatter {
 	case "plain":
 		return CreatePlainFormatter()
 	case "json":
-		return CreateJsonFormatter()
+		return CreateJSONFormatter()
 	default:
 		return CreateStylishFormatter()
 	}

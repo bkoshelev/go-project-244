@@ -66,7 +66,7 @@ func TestPlainFormatter(t *testing.T) {
 	}
 }
 
-func TestJsonFormatter(t *testing.T) {
+func TestJSONFormatter(t *testing.T) {
 
 	deep_json, _ := os.ReadFile("../../testdata/fixtures/deep_json.txt")
 
@@ -85,10 +85,10 @@ func TestJsonFormatter(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		name := fmt.Sprintf("JsonFormatter(%s)", c.diff)
+		name := fmt.Sprintf("JSONFormatter(%s)", c.diff)
 
 		t.Run(name, func(t *testing.T) {
-			got, _ := CreateJsonFormatter().Format(c.diff)
+			got, _ := CreateJSONFormatter().Format(c.diff)
 			assert.Equal(t, c.want, got)
 		})
 	}
